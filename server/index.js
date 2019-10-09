@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
+const controller = require('./controllers/controller.js'); //access db
+const db = require('./db/db.js'); //connect to db
 
 app.use(cors());
 app.use(morgan('dev'));
@@ -15,10 +17,6 @@ if (port == null || port == "") {
   port = 3000;
 }
 
-app.post('/upload',function(req, res) {
-});
-
-app.get('/update',function(req, res) {
-});
+app.post('/signup',controller.add);
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
