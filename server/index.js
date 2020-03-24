@@ -1,13 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const morgan = require('morgan');
 const cors = require('cors');
-const controller = require('./controllers/controller.js'); //access db
-const db = require('./db/db.js'); //connect to db
+const controller = require('./controllers'); //access db
+const db = require('./db'); //connect to db
 
 app.use(cors());
-app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/../client/public')));
 
@@ -17,6 +15,6 @@ if (port == null || port == "") {
   port = 3000;
 }
 
-app.post('/signup',controller.add);
+app.post('/', controller.add);
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
